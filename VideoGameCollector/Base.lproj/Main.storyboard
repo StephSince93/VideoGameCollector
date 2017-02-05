@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" id="N7M-jx-twB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VpS-Rs-tul">
                             <connections>
-                                <segue destination="5ww-Bl-JzE" kind="show" id="SfY-IQ-Lsz"/>
+                                <segue destination="5ww-Bl-JzE" kind="show" identifier="gameSegue" id="SfY-IQ-Lsz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -70,25 +70,35 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28n-8g-hyC">
-                                <rect key="frame" x="164" y="411" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="172" y="411" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addTapped:" destination="5ww-Bl-JzE" eventType="touchUpInside" id="OxF-pF-g6z"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Title of Game" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-86-rdW">
-                                <rect key="frame" x="56" y="322" width="275" height="22"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of Game" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-86-rdW">
+                                <rect key="frame" x="56" y="322" width="275" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4t-GQ-lLb">
+                                <rect key="frame" x="165" y="457" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="addTapped:" destination="5ww-Bl-JzE" eventType="touchUpInside" id="pQK-ns-brU"/>
+                                    <action selector="deleteTapped:" destination="5ww-Bl-JzE" eventType="touchUpInside" id="Q4a-vo-DKn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bOS-86-rdW" firstAttribute="top" secondItem="gSA-Ez-reX" secondAttribute="bottom" constant="25" id="1xa-QQ-WhZ"/>
+                            <constraint firstItem="c4t-GQ-lLb" firstAttribute="top" secondItem="28n-8g-hyC" secondAttribute="bottom" constant="22" id="2Lz-QQ-uRT"/>
                             <constraint firstItem="gSA-Ez-reX" firstAttribute="top" secondItem="eQa-76-SD1" secondAttribute="bottom" constant="75" id="CLV-H4-D7T"/>
                             <constraint firstItem="bOS-86-rdW" firstAttribute="centerX" secondItem="atn-hQ-bIW" secondAttribute="centerX" id="L8a-23-Nl3"/>
                             <constraint firstItem="bOS-86-rdW" firstAttribute="width" secondItem="gSA-Ez-reX" secondAttribute="width" id="NVV-xz-wPQ"/>
+                            <constraint firstItem="c4t-GQ-lLb" firstAttribute="centerX" secondItem="atn-hQ-bIW" secondAttribute="centerX" id="XK2-Zb-Yx6"/>
                             <constraint firstItem="28n-8g-hyC" firstAttribute="top" secondItem="bOS-86-rdW" secondAttribute="bottom" constant="25" id="bnZ-IV-jXI"/>
                             <constraint firstItem="gSA-Ez-reX" firstAttribute="centerX" secondItem="atn-hQ-bIW" secondAttribute="centerX" id="igy-0X-ujF"/>
                             <constraint firstItem="28n-8g-hyC" firstAttribute="centerX" secondItem="atn-hQ-bIW" secondAttribute="centerX" id="yr2-ej-EXU"/>
@@ -109,6 +119,8 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addupdatebutton" destination="28n-8g-hyC" id="egy-RK-sXw"/>
+                        <outlet property="deleteButton" destination="c4t-GQ-lLb" id="XZ8-dw-AmQ"/>
                         <outlet property="gameImageView" destination="gSA-Ez-reX" id="yRU-V9-32U"/>
                         <outlet property="titleTextField" destination="bOS-86-rdW" id="1AG-wU-gaX"/>
                     </connections>

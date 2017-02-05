@@ -12,6 +12,7 @@ class VideoGameViewController: UIViewController,UIImagePickerControllerDelegate,
     
     //allows for user to add a photo from their camera roll
     var imagePicker = UIImagePickerController()
+    var game : Game? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,19 @@ class VideoGameViewController: UIViewController,UIImagePickerControllerDelegate,
         //allows image picker to send picture to itself
         imagePicker.delegate = self
 
-        // Do any additional setup after loading the view.
+                
+        if game != nil
+        {
+           gameImageView.image = UIImage(data: game!.image as! Data)
+            titleTextField.text = game!.title
+            print("We have a game")
+            addupdatebutton.setTitle("Update", for: .normal)
+        }
+        else {
+            
+            deleteButton.isHidden = true
+            print("We have no game")
+        }
     }
     @IBAction func photoTapped(_ sender: Any)
     {
@@ -37,7 +50,14 @@ class VideoGameViewController: UIViewController,UIImagePickerControllerDelegate,
         //goes back to image viewController
         imagePicker.dismiss(animated: true, completion: nil)
     }
-    @IBAction func cameraTapped(_ sender: Any) {
+    @IBAction func cameraTapped(_ sender: Any)
+    {
+        
+        //takes user to their camera from the iphone
+        imagePicker.sourceType = .camera
+        //grabs photo and goes back to app but doesnt do anything after
+        present(imagePicker, animated: true, completion: nil)
+
     }
     
     //image placeholder where the picture selected goes
@@ -45,8 +65,24 @@ class VideoGameViewController: UIViewController,UIImagePickerControllerDelegate,
     
     @IBOutlet weak var titleTextField: UITextField!
     
+    
+    @IBOutlet weak var addupdatebutton: UIButton!
+    
+    
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    
     @IBAction func addTapped(_ sender: Any)
     {
+        
+        if game != nil
+        {
+            
+            game!.title = titleTextField.text
+            game!.image = UIImagePNGRepresentation(gameImageView.image!) as NSData!
+           
+        }
+         else {
        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         //grabs the entities from the core data
        let game = Game(context: context)
@@ -54,13 +90,23 @@ class VideoGameViewController: UIViewController,UIImagePickerControllerDelegate,
         game.title = titleTextField.text
         game.image = UIImagePNGRepresentation(gameImageView.image!) as NSData!
         
+        }
         
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
-       
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         navigationController!.popViewController(animated: true)
-     
+   
+    }
+    
+        
+    @IBAction func deleteTapped(_ sender: Any)
+    {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(game!)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        navigationController!.popViewController(animated: true)
         
         
     }
+        
+    
 }
